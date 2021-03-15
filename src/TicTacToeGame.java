@@ -1,8 +1,7 @@
-import java.util.Locale;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeGame {
-
     public static int index;
     public static char[] board;
     public static Scanner sc = new Scanner(System.in);
@@ -18,16 +17,9 @@ public class TicTacToeGame {
 
     //method to take user input
     public static char userInput() {
-        char computer = 'O';
         System.out.println("Enter the input X/O.");
-        char userInput = sc.next().charAt(0);
-        if (userInput == computer) {
-            computer = 'X';
-        } else if (userInput != computer) {
-            computer = 'O';
-        } else {
-            System.out.println("Invalid input.");
-        }
+        char userInput = sc.next().toUpperCase().charAt(0);
+        int computer = (userInput == 'X') ? 'O' : 'X';
         return userInput;
     }
 
@@ -35,28 +27,28 @@ public class TicTacToeGame {
     public static char[] displayBoard() {
             index = 1;
             System.out.println(" | " + board[index] + " | " + board[index + 1] + " | " + board[index + 2] + " | ");
+            System.out.println("___________");
             System.out.println(" | " + board[index + 3] + " | " + board[index + 4] + " | " + board[index + 5] + " | ");
+            System.out.println("___________");
             System.out.println(" | " + board[index + 6] + " | " + board[index + 7] + " | " + board[index + 8] + " | ");
         return board;
     }
 
-    public static char[] makeMove() {
-        boolean occupied = false;
-        while (!occupied) {
-            System.out.println("Enter the index from 1 to 9");
-            int indexValue = sc.nextInt();
-            if (board[indexValue] != ' ') {
-                System.out.println("Entered index in occupied.");
-                occupied = false;
-            } else {
-                board[indexValue] = userInput(); //calling method to take input from user
-                occupied = true;
-            }
-            //calling method to display board after taking user input
-            displayBoard();
+    //method to make a move by user
+    private static int makeMove(char [] board) {
+        Integer[] validCells = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        while (true) {
+            System.out.println("What is the next move? (1-9): ");
+            int userIndex = sc.nextInt();
+            if (Arrays.asList(validCells).contains(userIndex) && isSpaceFree(board, userIndex))
+                return userIndex;
         }
-        return board;
     }
+
+    //method to check whether particular index is free or not
+    private static boolean isSpaceFree(char[] board, int index){
+            return board[index] == ' ';
+        }
 
     //main method to execute the program
     public static void main(String[] args) {
@@ -66,6 +58,6 @@ public class TicTacToeGame {
         //calling method to display board
         displayBoard();
         //calling method to make a move
-        makeMove();
+        int userMove = makeMove(board);
     }
 }
