@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.util.*;
 public class TicTacToeGame {
     public static int index;
     public static char[] board;
@@ -51,6 +51,14 @@ public class TicTacToeGame {
             return board[index] == ' ';
         }
 
+    private static boolean takeToss() {
+        System.out.println("Enter the number\n1 for Head\n2 for Tail");
+        int choice = sc.nextInt();
+        int random = (int) Math.floor(Math.random() * 2 );
+        boolean won = (random == choice) ? true : false;
+        return won;
+    }
+
     //main method to execute the program
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe Game.");
@@ -58,7 +66,11 @@ public class TicTacToeGame {
         board = createBorad();
         //calling method to display board
         displayBoard();
+        //check who won the toss
+        boolean wonOrLoss = takeToss();
         //calling method to make a move
         int userMove = makeMove(board);
+
+
     }
 }
