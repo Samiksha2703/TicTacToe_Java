@@ -27,9 +27,7 @@ public class TicTacToeGame {
     public static char[] displayBoard() {
             index = 1;
             System.out.println(" | " + board[index] + " | " + board[index + 1] + " | " + board[index + 2] + " | ");
-            System.out.println("___________");
             System.out.println(" | " + board[index + 3] + " | " + board[index + 4] + " | " + board[index + 5] + " | ");
-            System.out.println("___________");
             System.out.println(" | " + board[index + 6] + " | " + board[index + 7] + " | " + board[index + 8] + " | ");
         return board;
     }
@@ -40,7 +38,10 @@ public class TicTacToeGame {
         while (true) {
             System.out.println("What is the next move? (1-9): ");
             int userIndex = sc.nextInt();
-            if (Arrays.asList(validCells).contains(userIndex) && isSpaceFree(board, userIndex))
+            if (Arrays.asList(validCells).contains(userIndex) && isSpaceFree(board, userIndex)){
+                board[userIndex] = userInput();
+                displayBoard();
+            }
                 return userIndex;
         }
     }
