@@ -33,11 +33,10 @@ public class TicTacToeGame {
 
     //method to display board
     public static char[] displayBoard() {
-        int initialize = 1;
-        for (index = initialize; index <= board.length - initialize; index++) {
+            index = 1;
             System.out.println(" | " + board[index] + " | " + board[index + 1] + " | " + board[index + 2] + " | ");
-            initialize = initialize + 3;
-        }
+            System.out.println(" | " + board[index + 3] + " | " + board[index + 4] + " | " + board[index + 5] + " | ");
+            System.out.println(" | " + board[index + 6] + " | " + board[index + 7] + " | " + board[index + 8] + " | ");
         return board;
     }
 
@@ -50,9 +49,11 @@ public class TicTacToeGame {
                 System.out.println("Entered index in occupied.");
                 occupied = false;
             } else {
-                board[indexValue] = userInput();
+                board[indexValue] = userInput(); //calling method to take input from user
                 occupied = true;
             }
+            //calling method to display board after taking user input
+            displayBoard();
         }
         return board;
     }
@@ -62,10 +63,9 @@ public class TicTacToeGame {
         System.out.println("Welcome to Tic Tac Toe Game.");
         //calling method to create board
         board = createBorad();
-        //calling method to take input
-        char input = userInput();
+        //calling method to display board
         displayBoard();
+        //calling method to make a move
         makeMove();
-        displayBoard();
     }
 }
